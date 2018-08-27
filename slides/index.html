@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Cross-Browser Browser Extensions</title>
+    <meta name="description" content="Possibly the most insightful presentation of all time" />
+
+    <link rel="stylesheet" href="tomorrow-night-blue.css">
+    <link rel="stylesheet" href="decky.css">
+    <script src="highlight.min.js"></script>
+    <style>
+      .compat {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+        margin: 1em 0;
+      }
+      .compat img {
+        height: calc(var(--slide-height) * .25);
+        filter: grayscale(100%);
+        opacity: .6;
+      }
+      .compat.fx .fx,
+      .compat.op .op,
+      .compat.ch .ch,
+      .compat.ed .ed,
+      .compat.sf .sf {
+        opacity: 1;
+        filter: none;
+      }
+      .compat-grid {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr 1fr 1fr;
+        align-items: center;
+        grid-gap: 1em 1em;
+      }
+      .compat-grid img {
+        height: calc(var(--slide-height) / 8);
+      }
+      .compat-grid img.yes {
+        opacity: 1;
+        filter: none;
+      }
+      .compat-grid code {
+        font-size: .8em;
+        text-align: right;
+      }
+      .browser {
+        height: calc(var(--slide-height) / 8);
+      }
+    </style>
+  </head>
+  <body>
+
+    <section>
+      # Games on the web!
+      <h3>PAX Dev 2018</h3>
+    </section>
+
+    <section data-step="li">
+      # The Web is a Universal Operating System
+
+      # The Web <span style="color:#f90;">Browser</span> is a Universal <span style="white-space:nowrap">Operating System</span>
+    </section>
+
+    <section>
+      <div class="stack">
+        <div style="background:hsl(120,50%,50%)">
+          <div>User</div>
+        </div>
+        <div style="background:hsl(60,50%,50%)">
+          <div>App</div><div>Service</div>
+        </div>
+        <div style="background:hsl(30,50%,50%)">
+          <div>Operating System</div>
+        </div>
+        <div style="background:hsl(250,50%,50%)">
+          <div>Hardware</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="stack">
+        <div style="background:hsl(120,50%,50%)">
+          <div>User</div>
+        </div>
+        <div style="background:hsl(60,50%,50%)">
+          <div>Tab</div><div>Tab</div>
+        </div>
+        <div style="background:hsl(30,50%,50%)">
+          <div>Web Browser</div>
+        </div>
+        <div style="background:hsl(250,50%,50%)">
+          <div>Hardware</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="stack">
+        <div style="background:hsl(120,50%,50%)">
+          <div>User</div>
+        </div>
+        <div style="background:hsl(60,50%,50%)">
+          <div>Tab</div><div>Tab</div>
+        </div>
+        <div style="background:hsl(30,50%,50%)">
+          <div>Web Browser</div>
+        </div>
+        <div style="background:hsl(0,50%,50%)">
+          <div>Operating System</div>
+        </div>
+        <div style="background:hsl(250,50%,50%)">
+          <div>Hardware</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="stack">
+        <div style="background:hsl(120,50%,50%)">
+          <div>User</div>
+        </div>
+        <div style="background:hsl(60,50%,50%)">
+          <div>Tab</div><div>Tab</div>
+        </div>
+        <div style="background:hsl(30,50%,50%)">
+          <div>Web Browser</div>
+        </div>
+        <div style="background:hsl(0,50%,50%)">
+          <div>OS</div>
+          <div>OS</div>
+          <div>OS</div>
+          <div>OS</div>
+        </div>
+        <div style="background:hsl(250,50%,50%)">
+          <div>Hardware</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      # The Web Browser is a Universal <span style="white-space:nowrap">Operating System</span>
+
+      # The Web Browser is a Universal <span style="color:#f90;white-space:nowrap">Virtual Machine</span>
+
+      # A Crash Review of the Web Platform
+
+      # Input
+    </section>
+
+    <section data-step="li">
+      # Input
+      * Keyboard
+      * Mouse
+      * Touch
+      * **Gamepad**
+    </section>
+
+    <section>
+      ## The Gamepad API
+      ```js
+      addEventListener('gamepadconnected', function (e) {
+        let gamepadId = e.gamepad.index;
+        setupGamepad(gamepadId);
+      });
+
+      function gameLoop() {
+        // ...
+        let gamepad = navigator.getGamepads()[gamepadId];
+        gamepad.buttons[0].pressed; // boolean
+        gamepad.axes[1];            // -1..1
+        // ...
+      }
+      ```
+      <span class="note">https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API</span>
+    </section>
+
+    <section>
+      <h2>The Gamepad API</h2>
+      <div class="compat ch fx ed">
+        <img class="ch" src="img/chrome.svg">
+        <img class="fx" src="img/firefox.svg">
+        <img class="ed" src="img/edge.svg">
+        <img class="sa" src="img/safari.png">
+      </div>
+    </section>
+
+    <section data-step=".new">
+      # Input
+      * Keyboard
+      * Mouse
+      * Touch
+      * Gamepad
+      <li class="new"><b>Audio/Video</b></li>
+    </section>
+
+    <section>
+      ## WebRTC
+      ```js
+      navigator.mediaDevices.getUserMedia({
+        audio: true, video: true
+      }).then(function(stream) {
+        let video = document.querySelector('video');
+        video.srcObject = stream;
+        video.addEventListener('loadedmetadata', function(e) {
+          video.play(); // Frame data will become available
+        });
+      }).catch(function(err) {
+        console.log(err.name + ": " + err.message);
+      });
+      ```
+    </section>
+
+    <section>
+      <h2>WebRTC</h2>
+      <div class="compat ch fx ed sf">
+        <img class="ch" src="img/chrome.svg">
+        <img class="fx" src="img/firefox.svg">
+        <img class="ed" src="img/edge.svg">
+        <img class="sf" src="img/safari.png">
+      </div>
+    </section>
+
+    <section>
+      # Output
+
+      ## Canvas
+      ## Canvas2D
+      ## WebGL
+      * OpenGL ES 3 (WebGl 2)
+    </section>
+
+    <section>
+      # WebVR!
+    </section>
+
+    <section data-step="li">
+      # JavaScript
+      ES6
+      ## Modern Performance
+      * JIT
+      * VM
+    </section>
+
+    <section>
+      ## <q>Any *Real* Languages?</q>
+    </section>
+
+    <section data-step="li">
+      # WebAssembly
+      * treats the web platform as a compliation target
+      * for the languages you already know!
+      * great at c/c++
+      * (backend for LLVM)
+      * emscripten
+      ***
+      screenshot of firefox in win2k in firefox (bellard.org)
+      ***
+      ![but why](img/butwhy.jpg)
+      ***
+      Archive.org emulation
+      ***
+      ## Ever watch a video on wikipedia in IE?
+      * Yeah.
+      * https://brionv.com/log/2015/08/09/video-decoding-in-the-javascript-platform-ogv-js-how-u-work/comment-page-1/
+      ***
+      ## Iodide
+      * Full Scientific Python Stack
+        * SciPy, NumPy, matplotlib
+      * Running on CPython
+      * In the Browser
+      ***
+      <a class="cite" href="https://web.autocad.com/">AutoCad Web</a>
+      ***
+      "Moving a 30 Year Codebase to the Web", qcon NY
+      * https://qconnewyork.com/ny2018/ny2018/presentation/web-assembly-autodesk.html
+      ***
+      What do you hope a developer will take away from this talk?
+
+      I want them to go away with the conviction that it is possible to reuse their legacy apps on the web rather than rewrite code from scratch.
+      ***
+      The web is ready for sophisitcated, performant software, built on extant technology
+    </section>
+
+    <section>
+      # WebAssembly is here!
+      https://blogs.unity3d.com/2018/08/15/webassembly-is-here/
+    </section>
+
+    <section>
+      # How can I start?
+      ### (How do I sell this?)
+    </section>
+
+    <section>
+      ## Demo Perhaps?
+
+      <a target="_blank" href="https://www.humblebundle.com/play/asmjs/ftl_asm_demo/demo">Humble Bundle FTL ↗️</a><br>
+      <a target="_blank" href="https://www.humblebundle.com/play/asmjs/superhexagon_asm_demo/demo">Super Hexagon ↗️</a>
+    </section>
+
+    <section data-step="li">
+      ## Shared Resources / Second Screen
+      * Character Customizer
+      * Inventory/Auction House
+      * Guild Management
+      * Spectator Mode
+      # Ship it on the web!
+    </section>
+
+    <section>
+      # Rust
+      rust-lang.org
+      ## <q>Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety.</q>
+      ## Rust is Good™
+      ## Rust is Good™ For Games®
+    </section>
+
+    <section>
+      # But Don't Take My Word For It
+      <small>(insert lavar burton)</small>
+      ***
+      (30 days ago) Ready at Dawn (AAA studio) makes the switch
+      https://twitter.com/AndreaPessino/status/1021532074153394176?s=20
+      ***
+      (30 days ago) Discussion in the Reddit comments about the SEED team (R&D) at EA switching to rust.
+      https://www.reddit.com/r/rust/comments/91cepg/game_studio_ready_at_dawn_switching_to_rust_for/
+      ***
+      (Recent) piston rust game framework
+      http://blog.piston.rs/
+      ***
+      (5days ago) proposed game dev working group
+      https://internals.rust-lang.org/t/a-working-group-for-rust-game-development/8240
+      ***
+      (2days ago) wishlist to improve game dev
+      https://users.rust-lang.org/t/my-gamedever-wishlist-for-rust/2859?u=erlend_sh
+      ***
+      (Late last year) blizzcon q+a field a question rust. Takeaway: retooling to a new language seems insurmountable. Large c++ codebase. Can’t interrupt velocity. Small teams may be a beachhead
+      https://www.reddit.com/r/rust/comments/7c8fyn/blizzcon_have_you_programmed_in_rust/
+    </section>
+
+    <section class="pr" data-step="img">
+      <img style="position:absolute;bottom:0;right:2em;mix-blend-mode:multiply;filter:contrast(150%);transform:scale(-1.5,1.5);transform-origin: bottom center" src="img/waluigi.png"/>
+      <h2 style="position:relative;z-index:1;top:-1em"><q>I've got hundreds of thousands of lines of C++, and a full product pipeline.</q></h2>
+    </section>
+    <section>
+      ## *David Bryant*
+      #### Mozilla Fellow,<br>Former VP of Platform Engineering
+    </section>
+
+    <section>
+      <h3>&ldquo;You got Rust in my WebAssembly!&rdquo;</h3>
+    </section>
+
+    <section>
+      # `wasm-bindgen`
+      wasm ↔️ DOM FFI Generator
+      ***
+
+      ```
+      extern crate wasm_bindgen;
+      use wasm_bindgen::prelude::*;
+
+      #[wasm_bindgen]
+      extern {
+          fn alert(s: &str);
+      }
+
+      #[wasm_bindgen]
+      pub fn greet(name: &str) {
+          alert(&format!("Hello, {}!", name));
+      }
+      ```
+    </section>
+
+    <section>
+      # What's next?
+    </section>
+
+    <section>
+      ## WebGPU
+      * Successor to WebGL
+      * Intended to work over both Vulkan and Metal
+    </section>
+
+    <section>
+      ## Web Payments
+      * Brokers payment flow
+      * No credit card form!
+      * Users can save CC info to their browser
+        * Better conversion 💰💰
+    </section>
+
+    <section>
+      # In Conclusion
+      <q>The Web Is A Land Of Contrasts</q><br>
+      <q>The Real Web Assembly is the Friends We Made Along the Way</q>
+    </section>
+
+    <section>
+      # WIP Zone
+      ## Unity WebVR Assets
+      https://hacks.mozilla.org/2018/02/create-vr-on-the-web-using-unity3d/
+
+      ## Gamepad API
+      <span class="note">https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API</span>
+
+      ## WebSockets
+      https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+
+      Raw material that may help:
+
+      # Audio
+      ## Media Playback
+      * &lt;audio> and &lt;video>
+      * Plays media back…
+      * Can be used as a source for textures/audio graphs
+
+      ## Web Audio API
+      * Both playback and synthesis
+      * Component graph
+      * Basic processing/effects
+
+      ## Canvas
+      Your graphical pal who’s fun to be with
+
+      ### 2D
+      Quartz-like syntax
+
+      ### WebGL
+      The Business™
+      OpenGL ES 3 (WebGL 2)
+
+      # DOM
+      Interface elements, readouts, menus
+      Accessible, browser is already good at layout!
+
+      # WebAssembly
+      Runs in the JS VM
+      Like a fantasy 64-bit PICO-8
+      Actually, PICO-8’s web implementation is WebAssembly!
+
+      ***
+      screenshot of firefox in win2k in firefox
+      ***
+
+      # The Future
+      ## Web Payments (2019?)
+      Brokers payment flow
+      no credit card form!
+      Users can save CC info to their browser, better initial conversion
+
+      # Rust!
+      ## &lt;3 WebAssembly
+      https://github.com/rustwasm/wasm-bindgen
+      https://rustwasm.github.io/book/game-of-life/introduction.html
+
+      ## But Don’t take my word for it!
+      (30 days ago) Ready at Dawn (AAA studio) makes the switch
+      https://twitter.com/AndreaPessino/status/1021532074153394176?s=20
+
+      (30 days ago) Discussion in the Reddit comments about the SEED team (R&D) at EA switching to rust.
+      https://www.reddit.com/r/rust/comments/91cepg/game_studio_ready_at_dawn_switching_to_rust_for/
+
+      (Late last year) blizzcon q+a field a question rust. Takeaway: retooling to a new language seems insurmountable. Large c++ codebase. Can’t interrupt velocity. Small teams may be a beachhead
+      https://www.reddit.com/r/rust/comments/7c8fyn/blizzcon_have_you_programmed_in_rust/
+
+      (Recent) piston rust game framework
+      http://blog.piston.rs/
+
+      (5days ago) proposed game dev working group
+      https://internals.rust-lang.org/t/a-working-group-for-rust-game-development/8240
+
+      (2days ago) wishlist to improve game dev
+      https://users.rust-lang.org/t/my-gamedever-wishlist-for-rust/2859?u=erlend_sh
+
+      https://www.reddit.com/r/rust_gamedev/
+
+      http://arewegameyet.com/
+    </section>
+
+    <footer>
+    </footer>
+    <script src="plugins.js"></script>
+    <script src="marked.min.js"></script>
+    <script>
+      deckyPlugin.markdown();
+      deckyPlugin.slideSteps();
+    </script>
+    <script src="decky.js"></script>
+    <script>
+      deckyPlugin.progressBars(50);
+      deckyPlugin.iframes();
+      deckyPlugin.asyncCode();
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
