@@ -36,7 +36,8 @@ const deckyPlugin = {
 
     slides.forEach(slide => {
       seenH1 = false;
-      let result = marked(trim(slide.innerHTML), { renderer });
+      let innerHTML = slide.innerHTML.replace(/&amp;/g, '&').replace(/&gt;/g, '>');
+      let result = marked(trim(innerHTML), { renderer });
       let parts = result.split('<!-- SPLIT -->');
       slide.innerHTML = parts[0];
       for (let i = parts.length - 1; i > 0; i--) {

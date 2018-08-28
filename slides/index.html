@@ -58,8 +58,24 @@
       <h3>PAX Dev 2018</h3>
     </section>
 
+    <section>
+      <img src="img/mario-square.jpg" style="border-radius:50%">
+    </section>
+
+    <section>
+      <img src="img/patentquest.png" style="width:calc(var(--slide-width) * .8);image-rendering: -moz-crisp-edges;image-rendering: -webkit-optimize-contrast;image-rendering: crisp-edges;image-rendering: pixelated;">
+    </section>
+
+    <section>
+      <img src="img/moz-logo.svg" style="width:calc(var(--slide-width) * .7)">
+    </section>
+
+    <section>
+      <img src="img/firefox.svg" style="width:calc(var(--slide-height) * .7)">
+    </section>
+
     <section data-step="li">
-      # The Web is a Universal Operating System
+      # The Web is a<br>Universal<br> Operating System
 
       # The Web <span style="color:#f90;">Browser</span> is a Universal <span style="white-space:nowrap">Operating System</span>
     </section>
@@ -104,7 +120,7 @@
           <div>User</div>
         </div>
         <div style="background:hsl(60,50%,50%)">
-          <div>Tab</div><div>Tab</div>
+          <div>Page</div>
         </div>
         <div style="background:hsl(30,50%,50%)">
           <div>Web Browser</div>
@@ -124,19 +140,24 @@
           <div>User</div>
         </div>
         <div style="background:hsl(60,50%,50%)">
-          <div>Tab</div><div>Tab</div>
+          <div>Tab</div>
+          <div>Tab</div>
+          <div>Tab</div>
+          <div>∞&nbsp;Tabs</div>
         </div>
         <div style="background:hsl(30,50%,50%)">
           <div>Web Browser</div>
         </div>
         <div style="background:hsl(0,50%,50%)">
-          <div>OS</div>
-          <div>OS</div>
-          <div>OS</div>
-          <div>OS</div>
+          <div>macOS</div>
+          <div>Windows</div>
+          <div>GladOS</div>
+          <div>iOS</div>
         </div>
         <div style="background:hsl(250,50%,50%)">
-          <div>Hardware</div>
+          <div>HAL</div>
+          <div>Intel</div>
+          <div>ARM</div>
         </div>
       </div>
     </section>
@@ -149,14 +170,6 @@
       # A Crash Review of the Web Platform
 
       # Input
-    </section>
-
-    <section data-step="li">
-      # Input
-      * Keyboard
-      * Mouse
-      * Touch
-      * **Gamepad**
     </section>
 
     <section>
@@ -186,15 +199,6 @@
         <img class="ed" src="img/edge.svg">
         <img class="sa" src="img/safari.png">
       </div>
-    </section>
-
-    <section data-step=".new">
-      # Input
-      * Keyboard
-      * Mouse
-      * Touch
-      * Gamepad
-      <li class="new"><b>Audio/Video</b></li>
     </section>
 
     <section>
@@ -227,79 +231,149 @@
     <section>
       # Output
 
-      ## Canvas
-      ## Canvas2D
-      ## WebGL
-      * OpenGL ES 3 (WebGl 2)
+      # Canvas2D
+      ### Quartz-ish
+      ```js
+      ctx.fillRect(0, 0, 100, 100);
+      ```
+      # WebGL
+      ### OpenGL ES 3 (WebGl 2)
     </section>
 
     <section>
       # WebVR!
     </section>
 
-    <section data-step="li">
-      # JavaScript
-      ES6
-      ## Modern Performance
-      * JIT
-      * VM
+    <section>
+      ```js
+      let displays = await navigator.getVRDisplays();
+      let vrDisplay = displays[0];
+      vrDisplay.requestPresent([{ source: canvas }]);
+      vrDisplay.getEyeParameters('left');
+      vrDisplay.requestAnimationFrame(drawVRScene);
+
+      // each frame
+      vrDisplay.getFrameData(frameData);
+      let pose = frameData.pose;
+      pose.position    // 3D Vector
+      pose.orientation // Quaternion
+      ```
     </section>
 
     <section>
-      ## <q>Any *Real* Languages?</q>
+      # Web<span style="color:#f66;">AR</span>!
+      # Web<span style="color:#4ff;">MR</span>!
+      # Web<span style="color:#f4f;">XR</span>!
+    </section>
+
+    <section data-step="h3">
+      # Networking
+      # WebSockets
+      ### Client ↔️ Server Messaging
+      # WebRTC
+      ### P2P TCP 📡
+      ### Audio/Video Streaming 🎙
+    </section>
+
+    <section data-step="h3">
+      # JavaScript!
+      ### no wait please don't leave
+      # ES6+
+      ### It ain't your great-grandma's<br>web scripting language
+      ***
+      ```coffeescript
+      import { Entity } from 'core'
+
+      class Crate extends Entity {
+        break () {
+          return randomItem()
+        }
+      }
+
+      window.addEventListener(async () => {
+        let assetList = await fetch('./assets.json')
+        assetList = await assetList.json()
+        loadAssets(assetList)
+      })
+      ```
+      ## Modern Language,<br>Modern Performance
+      ### Full Multi-Tier JIT
+      ### Sandboxed VM
+    </section>
+
+    <section>
+      <h2>&ldquo;Any <i>Real</i> Languages?&rdquo;</h2>
+    </section>
+
+    <section style="font-family:cursive;">
+      <h1>The Legend</h1>
+      <h1><i>❧ of ☙</i></h1>
+      <h1>Emscripten</h1>
     </section>
 
     <section data-step="li">
       # WebAssembly
-      * treats the web platform as a compliation target
-      * for the languages you already know!
-      * great at c/c++
-      * (backend for LLVM)
-      * emscripten
-      ***
-      screenshot of firefox in win2k in firefox (bellard.org)
-      ***
+      * Treat the web as a compliation target
+      * For the languages you already know!
+      * Excellent C/C++ Support
+      * Danged-Near Native Speed (Seriously)
+      # WebAssembly How?
+      * &ldquo;A binary instruction format for a stack-based virtual machine&rdquo;
+      * Runs in the JavaScript VM
+      * Backend for LLVM
+    </section>
+
+    <section>
+      <img style="height:calc(var(--slide-height) * .9)" src="img/firefox-ception.png">
+    </section>
+
+    <section>
       ![but why](img/butwhy.jpg)
-      ***
-      Archive.org emulation
-      ***
-      ## Ever watch a video on wikipedia in IE?
-      * Yeah.
-      * https://brionv.com/log/2015/08/09/video-decoding-in-the-javascript-platform-ogv-js-how-u-work/comment-page-1/
-      ***
+    </section>
+
+    <section>
+      <img style="height:calc(var(--slide-height) * .9)" src="img/munchers.png">
+    </section>
+
+    <section>
+      <div style="margin:0 0 1em;font-family:Georgia;font-size:1rem;background:#202020;padding:3em 3em 1em;max-width:calc(var(--slide-width) * .67);color:#bebebe">
+        <h3 style="text-align:left;font-weight:400">Video decoding in the JavaScript platform: “ogv.js, how U work??”</h3>
+        <p style="text-align:left;">We’ve <u>started deploying my ogv.js JavaScript video/audio playback engine</u> to Wikipedia and Wikimedia Commons for better media compatibility in Safari, Internet Explorer and the new Microsoft Edge browser.</p>
+      </div>
+      <a class="note" href="https://brionv.com/log/2015/08/09/video-decoding-in-the-javascript-platform-ogv-js-how-u-work/">brionv.com/log/2015/08/09/video-decoding-in-the-javascript-platform-ogv-js-how-u-work/</a>
+    </section>
+
+    <section data-step="li">
       ## Iodide
       * Full Scientific Python Stack
         * SciPy, NumPy, matplotlib
       * Running on CPython
-      * In the Browser
+      * In the Browser!
+    </section>
+    <section>
+      ## &ldquo;AutoCAD & WebAssembly:
+      ### Moving a 30 Year Code Base to the Web&rdquo;
+      <a class="note" href="https://qconnewyork.com/ny2018/ny2018/presentation/web-assembly-autodesk.html">https://qconnewyork.com/ny2018/ny2018/presentation/web-assembly-autodesk.html</a>
       ***
-      <a class="cite" href="https://web.autocad.com/">AutoCad Web</a>
-      ***
-      "Moving a 30 Year Codebase to the Web", qcon NY
-      * https://qconnewyork.com/ny2018/ny2018/presentation/web-assembly-autodesk.html
-      ***
-      What do you hope a developer will take away from this talk?
-
-      I want them to go away with the conviction that it is possible to reuse their legacy apps on the web rather than rewrite code from scratch.
+      ### &ldquo;What do you hope a developer will take away from this talk?&rdquo;
+      <br><br>
+      <q>I want them to go away with the conviction that it is possible to reuse their legacy apps on the web rather than rewrite code from scratch.</q>
       ***
       The web is ready for sophisitcated, performant software, built on extant technology
     </section>
 
     <section>
-      # WebAssembly is here!
-      https://blogs.unity3d.com/2018/08/15/webassembly-is-here/
+      <div style="margin-bottom:1em;width:35rem;background:#fff;color:#000;padding:1em 1em 2em;">
+        <h2 style="font-size:2rem;text-align:left;"><span style="font-weight:200">Unity</span> <span style="font-weight:500">Blog</span></h2>
+        <h3 style="max-width:none;margin-top:2em;font-size:1.5rem;">WebAssembly is here!</h3>
+        <div style="margin-top:1rem;font-size:.8rem;"><b>Marco Trivellato</b>, August 15, 2018</div>
+      </div>
+      <a class="note" href="https://blogs.unity3d.com/2018/08/15/webassembly-is-here/">https://blogs.unity3d.com/2018/08/15/webassembly-is-here/</a>
     </section>
 
     <section>
       # How can I start?
       ### (How do I sell this?)
-    </section>
-
-    <section>
-      ## Demo Perhaps?
-
-      <a target="_blank" href="https://www.humblebundle.com/play/asmjs/ftl_asm_demo/demo">Humble Bundle FTL ↗️</a><br>
-      <a target="_blank" href="https://www.humblebundle.com/play/asmjs/superhexagon_asm_demo/demo">Super Hexagon ↗️</a>
     </section>
 
     <section data-step="li">
@@ -308,47 +382,99 @@
       * Inventory/Auction House
       * Guild Management
       * Spectator Mode
-      # Ship it on the web!
+    </section>
+
+    <section>
+      # Demos!
+
+      <a target="_blank" href="https://www.humblebundle.com/play/asmjs/ftl_asm_demo/demo">Humble Bundle FTL ↗️</a><br>
+      <a target="_blank" href="https://www.humblebundle.com/play/asmjs/superhexagon_asm_demo/demo">Super Hexagon ↗️</a>
+    </section>
+
+    <section>
+
     </section>
 
     <section>
       # Rust
+      <img src="img/rust-logo-blk.svg" style="height:5em;filter:invert(100%);">
+
       rust-lang.org
-      ## <q>Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety.</q>
-      ## Rust is Good™
-      ## Rust is Good™ For Games®
+      ***
+      <q>Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety.</q>
+      # Rust is Good™
+      ## Rust is Good For Games™®
     </section>
 
     <section>
       # But Don't Take My Word For It
       <small>(insert lavar burton)</small>
-      ***
-      (30 days ago) Ready at Dawn (AAA studio) makes the switch
-      https://twitter.com/AndreaPessino/status/1021532074153394176?s=20
-      ***
-      (30 days ago) Discussion in the Reddit comments about the SEED team (R&D) at EA switching to rust.
-      https://www.reddit.com/r/rust/comments/91cepg/game_studio_ready_at_dawn_switching_to_rust_for/
-      ***
-      (Recent) piston rust game framework
-      http://blog.piston.rs/
-      ***
-      (5days ago) proposed game dev working group
-      https://internals.rust-lang.org/t/a-working-group-for-rust-game-development/8240
-      ***
-      (2days ago) wishlist to improve game dev
-      https://users.rust-lang.org/t/my-gamedever-wishlist-for-rust/2859?u=erlend_sh
-      ***
+    </section>
+
+    <section>
+      <div style="text-align:left;font-family:sans-serif;margin:5em;padding:2em 2em 1em;color:#000;background:#fff;font-size:1.5rem;">
+        <img src="img/rust-logo-blk.svg" style="width:4em;margin-bottom:1em;">
+        <h3 style="text-align:left;font-weight:300;font-size:1.25rem;margin-bottom:.5em">Rust Case Study:</h3>
+        <h2 style="text-align:left;font-size:2rem;font-weight:500;">Chucklefish Taps Rust to Bring Safe Concurrency to Video Games</h2>
+        <div style="width:2em;height:.1em;background:darkorange; margin: .5em 0;"></div>
+        <a class="note" style="color:#000;" href="https://www.rust-lang.org/pdfs/Rust-Chucklefish-Whitepaper.pdf">https://www.rust-lang.org/pdfs/Rust-Chucklefish-Whitepaper.pdf</a>
+      </div>
+    </section>
+
+    <section>
+      <q>Rust is one of the few languages that really gives you a large amount of confidence that your parallel and concurrent code is anywhere near correct.</q>
+    </section>
+
+    <section>
+      <div style="background:#fff;padding:1em;margin:0 2em;color:#333;font-size:1rem;font-family:sans-serif;position:relative;text-align:left;">
+        <svg viewBox="0 0 20 50" style="width:1.1em;position:absolute;top:1.6em;left:1.5em;">
+          <path d="M10,0 l10,10 -3,3 -7,-7 -7,7 -3,-3" fill="#ccc"/>
+          <path d="M10,35l10,-10 -3,-3 -7,7 -7,-7 -3,3" fill="#ccc"/>
+        </svg>
+        <div style="border-left:.1em solid #ccc;padding:1em 0 1em 2em;">
+        <div style="font-size:.8em;color:#888;">[–] <b style="color:#369">repilur</b> <span style="font-size:.9em">1 month ago</span></div>
+        <p>Yes we use Rust as our primary language in SEED since about 4-5 months ago, building a new future based on it. Loving it and this awesome community. Esp. after 20+ years of C++ for professional game and engine development.
+
+        <p>We are hiring Rust programmers (or programmers keen on learning and embracing Rust) for a wide set of areas (gameplay, engine/graphics, full stack, and more) , primarily here in Stockholm but parts of our team is also in Los Angeles and remote (Netherlands, Montreal, BC).
+
+        <p>Will write up and share more about our experiences with Rust and what we are working on. But feel free to comment and DM me here or on twitter (@repi)!
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="tweet" style="border-radius:.5em;background:#fff;color:#333;font-size:1.5rem;font-family:sans-serif;text-align:left;padding:1.5em;margin:0 2em;">
+        <div style="display:grid;grid:'avatar name'auto'avatar handle'auto/auto auto;justify-content:start;align-items:center;grid-column-gap:1em;">
+          <img style="grid-area:avatar;border-radius:50%;height:3em;" src="img/andreapessino.jpg">
+          <b style="grid-area:name;align-self:end;">Andrea Pessino</b>
+          <div style="grid-area:handle;font-size:.8em;color:#888;">@AndreaPessino</div>
+        </div>
+        <p style="margin:1em 0;">It's finally happening - after >30 years of pro use, 20 of which quite reluctantly, I am officially DONE with C/C++. Only maintenance from now on, everything new will be in <span style="color:#1c94e0">@rustlang</span>. THANKS Rust team for refining modern concepts into such a practical, elegant system. I love it.</p>
+        <div style="font-size:.8em;color:#888;">4:06 PM - 23 Jul 2018</div>
+      </div>
+    </section>
+
+    <section>
+      # arewegameyet.com
+    </section>
+
+    <section>
       (Late last year) blizzcon q+a field a question rust. Takeaway: retooling to a new language seems insurmountable. Large c++ codebase. Can’t interrupt velocity. Small teams may be a beachhead
       https://www.reddit.com/r/rust/comments/7c8fyn/blizzcon_have_you_programmed_in_rust/
     </section>
 
-    <section class="pr" data-step="img">
-      <img style="position:absolute;bottom:0;right:2em;mix-blend-mode:multiply;filter:contrast(150%);transform:scale(-1.5,1.5);transform-origin: bottom center" src="img/waluigi.png"/>
-      <h2 style="position:relative;z-index:1;top:-1em"><q>I've got hundreds of thousands of lines of C++, and a full product pipeline.</q></h2>
+    <section data-step="img">
+      <img style="position:absolute;bottom:0;right:3em;height:calc(var(--slide-height)*.35);mix-blend-mode:multiply;filter:contrast(150%);transform:scale(-1.5,1.5);transform-origin: bottom center" src="img/waluigi.png"/>
+      <q style="position:relative;top:-2em;">I've got hundreds of thousands of lines of C++, and a full product pipeline.</q>
     </section>
+
     <section>
       ## *David Bryant*
       #### Mozilla Fellow,<br>Former VP of Platform Engineering
+    </section>
+
+    <section>
+      # Denoument
     </section>
 
     <section>
@@ -377,7 +503,7 @@
     </section>
 
     <section>
-      # What's next?
+      # The Future
     </section>
 
     <section>
@@ -398,88 +524,6 @@
       # In Conclusion
       <q>The Web Is A Land Of Contrasts</q><br>
       <q>The Real Web Assembly is the Friends We Made Along the Way</q>
-    </section>
-
-    <section>
-      # WIP Zone
-      ## Unity WebVR Assets
-      https://hacks.mozilla.org/2018/02/create-vr-on-the-web-using-unity3d/
-
-      ## Gamepad API
-      <span class="note">https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API</span>
-
-      ## WebSockets
-      https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
-
-      Raw material that may help:
-
-      # Audio
-      ## Media Playback
-      * &lt;audio> and &lt;video>
-      * Plays media back…
-      * Can be used as a source for textures/audio graphs
-
-      ## Web Audio API
-      * Both playback and synthesis
-      * Component graph
-      * Basic processing/effects
-
-      ## Canvas
-      Your graphical pal who’s fun to be with
-
-      ### 2D
-      Quartz-like syntax
-
-      ### WebGL
-      The Business™
-      OpenGL ES 3 (WebGL 2)
-
-      # DOM
-      Interface elements, readouts, menus
-      Accessible, browser is already good at layout!
-
-      # WebAssembly
-      Runs in the JS VM
-      Like a fantasy 64-bit PICO-8
-      Actually, PICO-8’s web implementation is WebAssembly!
-
-      ***
-      screenshot of firefox in win2k in firefox
-      ***
-
-      # The Future
-      ## Web Payments (2019?)
-      Brokers payment flow
-      no credit card form!
-      Users can save CC info to their browser, better initial conversion
-
-      # Rust!
-      ## &lt;3 WebAssembly
-      https://github.com/rustwasm/wasm-bindgen
-      https://rustwasm.github.io/book/game-of-life/introduction.html
-
-      ## But Don’t take my word for it!
-      (30 days ago) Ready at Dawn (AAA studio) makes the switch
-      https://twitter.com/AndreaPessino/status/1021532074153394176?s=20
-
-      (30 days ago) Discussion in the Reddit comments about the SEED team (R&D) at EA switching to rust.
-      https://www.reddit.com/r/rust/comments/91cepg/game_studio_ready_at_dawn_switching_to_rust_for/
-
-      (Late last year) blizzcon q+a field a question rust. Takeaway: retooling to a new language seems insurmountable. Large c++ codebase. Can’t interrupt velocity. Small teams may be a beachhead
-      https://www.reddit.com/r/rust/comments/7c8fyn/blizzcon_have_you_programmed_in_rust/
-
-      (Recent) piston rust game framework
-      http://blog.piston.rs/
-
-      (5days ago) proposed game dev working group
-      https://internals.rust-lang.org/t/a-working-group-for-rust-game-development/8240
-
-      (2days ago) wishlist to improve game dev
-      https://users.rust-lang.org/t/my-gamedever-wishlist-for-rust/2859?u=erlend_sh
-
-      https://www.reddit.com/r/rust_gamedev/
-
-      http://arewegameyet.com/
     </section>
 
     <footer>

@@ -103,6 +103,10 @@ h2 {
   font-size: 3rem;
 }
 
+h1, h2 {
+  margin-bottom: .5rem;
+}
+
 h3 {
   font-size: 2rem;
 }
@@ -245,6 +249,36 @@ pre {
   max-height: 100%;
   margin-bottom: 0;
   overflow: auto;
+}
+
+q {
+  font-family:serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:1em;
+  display: block;
+  text-align:left;
+  text-indent: 1em;
+  position: relative;
+  max-width: calc(var(--slide-width) * .8);
+}
+q::before {
+  display: block;
+  font-size: 5em;
+  font-weight:600;
+  position:absolute;
+  top:-.4em;
+  left:-.2em;
+  opacity: .5;
+  text-indent: 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-family:serif;
+  font-weight:300;
+  font-size:2rem;
+  display: block;
 }
 
 .cani {
