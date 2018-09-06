@@ -4,7 +4,7 @@ Slides and resources for Games on the Web
 
 ## Slides
 
-[PAX West 2018 &mdash; "The Future of Web Games"](/slides/)
+[PAX West 2018 &mdash; "The Future of Web Games"](https://mozilla.github.io/web-games/slides/)
 
 ## Resources
 
